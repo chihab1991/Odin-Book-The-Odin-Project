@@ -41,9 +41,10 @@ const Hero = () => {
 					))}
 				</>
 			)}
-			{!isLoading && !posts && (
+			{!isLoading && posts?.length == 0 && (
 				<>
 					<div>
+						{/* TODO modify msg  */}
 						<h1>take it</h1>
 					</div>
 				</>

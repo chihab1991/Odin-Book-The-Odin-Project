@@ -12,8 +12,25 @@ const postsSlice = createSlice({
 		removePost: (state, action) => {
 			state.posts = state.posts.filter((post) => post._id !== action.payload);
 		},
+		addLike: (state, action) => {
+			state.posts = state.posts.map((post) => {
+				if (post._id === action.payload.postId) {
+					post.likes.push(action.payload.userId);
+				}
+				return post;
+			});
+		},
+		removeLike: (state, action) => {
+			state.posts = state.posts.map((post) => {
+				if (post._id === action.payload.postId) {
+					let index = post.likes.indexOf(action.payload.userId);
+					post.likes.splice(index, 1);
+				}
+				return post;
+			});
+		},
 	},
 });
-export const { setPosts, removePost } = postsSlice.actions;
+export const { setPosts, removePost, addLike, removeLike } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -3,6 +3,7 @@ import { useDeletePostMutation } from "../slices/postApiSlice";
 import { toast } from "react-toastify";
 import { removePost } from "../slices/postsSlice";
 import { useDispatch } from "react-redux";
+import Like from "./Like";
 
 const Post = ({ post, userId }) => {
 	const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Post = ({ post, userId }) => {
 					<h2>{post?.author.name}</h2>
 					<p>{post?.content}</p>
 					<p>date: {post?.createdAt}</p>
-					<p>likes!!</p>
+					<Like likes={post?.likes} userId={userId} postId={post?._id} />
 					<div>
 						<h4>Comment:</h4>
 						{post?.comments?.map((comment) => {
