@@ -45,6 +45,27 @@ export const postsApiSlice = apiSlice.injectEndpoints({
 				body: data,
 			}),
 		}),
+		addComment: builder.mutation({
+			query: (data) => ({
+				url: `/api/comment/`,
+				method: "POST",
+				body: data,
+			}),
+		}),
+		updateComment: builder.mutation({
+			query: (data) => ({
+				url: `/api/comment/`,
+				method: "PUT",
+				body: data,
+			}),
+		}),
+		deleteComment: builder.mutation({
+			query: (data) => ({
+				url: `/api/comment/`,
+				method: "DELETE",
+				body: data,
+			}),
+		}),
 	}),
 });
 
@@ -55,4 +76,7 @@ export const {
 	useDeletePostMutation,
 	useLikePostMutation,
 	useUnlikePostMutation,
+	useAddCommentMutation,
+	useUpdateCommentMutation,
+	useDeleteCommentMutation,
 } = postsApiSlice;

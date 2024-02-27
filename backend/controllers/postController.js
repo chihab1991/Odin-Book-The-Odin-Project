@@ -22,7 +22,16 @@ const getAllPosts = asyncHandler(async (req, res) => {
 	if (user) {
 		const posts = await Post.find({
 			author: [user._id, ...user.following],
-		}).populate("author", "name email");
+		})
+			.populate("author", "name email")
+			.populate({
+				path: "comments",
+				field: "text",
+				populate: {
+					path: "author",
+					select: "name email",
+				},
+			});
 		if (posts) {
 			res.status(200).json(posts);
 		} else {
@@ -54,6 +63,7 @@ const updatePost = asyncHandler(async (req, res) => {
 		"author",
 		"name email"
 	);
+
 	if (post) {
 		post.content = req.body.content || post.content;
 		const updatedPost = await post.save();

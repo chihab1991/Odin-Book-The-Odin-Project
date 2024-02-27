@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { removePost } from "../slices/postsSlice";
 import { useDispatch } from "react-redux";
 import Like from "./Like";
+import AddComment from "./AddComment";
+import Comment from "./Comment";
 
 const Post = ({ post, userId }) => {
 	const navigate = useNavigate();
@@ -29,7 +31,7 @@ const Post = ({ post, userId }) => {
 		<>
 			{post && (
 				<div>
-					{post?.author._id === userId && (
+					{post?.author?._id === userId && (
 						<div>
 							<button onClick={editHandler}>Edit</button>
 							<button onClick={deleteHandler}>Delete</button>
@@ -42,9 +44,17 @@ const Post = ({ post, userId }) => {
 					<Like likes={post?.likes} userId={userId} postId={post?._id} />
 					<div>
 						<h4>Comment:</h4>
-						{post?.comments?.map((comment) => {
-							<Comment key={comment._id} comment={comment} />;
+						{post?.comments.map((comment) => {
+							return (
+								<Comment
+									key={comment._id}
+									comment={comment}
+									postId={post?._id}
+									authorId={post?.author?._id}
+								/>
+							);
 						})}
+						<AddComment postId={post?._id} />
 					</div>
 				</div>
 			)}

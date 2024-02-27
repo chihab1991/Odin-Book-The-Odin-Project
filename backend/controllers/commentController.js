@@ -54,7 +54,7 @@ const deleteComment = asyncHandler(async (req, res) => {
 	if (post && deletedComment) {
 		res.status(200).json({ deletedComment, post });
 	} else {
-		res.status(400);
+		res.status(500);
 		throw new Error("can't delete comment please retry");
 	}
 });

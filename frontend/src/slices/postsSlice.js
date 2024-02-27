@@ -29,8 +29,46 @@ const postsSlice = createSlice({
 				return post;
 			});
 		},
+		newComment: (state, action) => {
+			state.posts = state.posts.map((post) => {
+				if (post._id === action.payload.postId) {
+					post.comments.push(action.payload.comment);
+				}
+				return post;
+			});
+		},
+		editComment: (state, action) => {
+			state.posts = state.posts.map((post) => {
+				if (post._id === action.payload.postId) {
+					const targetComment = post.comments.find(
+						(comment) => comment._id === action.payload.commentId
+					);
+					targetComment.text = action.payload.comment.text;
+				}
+				return post;
+			});
+		},
+		removeComment: (state, action) => {
+			state.posts = state.posts.map((post) => {
+				if (post._id === action.payload.postId) {
+					const commentIndex = post.comments.findIndex(
+						(comment) => comment._id === action.payload.commentId
+					);
+					post.comments.splice(commentIndex, 1);
+				}
+				return post;
+			});
+		},
 	},
 });
-export const { setPosts, removePost, addLike, removeLike } = postsSlice.actions;
+export const {
+	setPosts,
+	removePost,
+	addLike,
+	removeLike,
+	newComment,
+	editComment,
+	removeComment,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;
