@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import { defaultImg } from "../config/constantes.js";
 
 const registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
@@ -8,12 +9,14 @@ const registerUser = asyncHandler(async (req, res) => {
 		res.status(401);
 		throw new Error("Email already exist.");
 	}
-	const user = await User.create({ name, email, password });
+	const profilePic = defaultImg;
+	const user = await User.create({ name, email, password, profilePic });
 	if (user) {
 		res.status(200).json({
 			_id: user._id,
 			name: user.name,
 			email: user.email,
+			profilePic: user.profilePic,
 		});
 	} else {
 		res.status(401);
@@ -22,8 +25,8 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-	const { _id, name, email } = req.user;
-	res.status(200).json({ _id, name, email });
+	const { _id, name, email, profilePic } = req.user;
+	res.status(200).json({ _id, name, email, profilePic });
 });
 const getUser = asyncHandler(async (req, res) => {
 	res.status(200).json(req.user);
@@ -42,6 +45,7 @@ const updateUser = asyncHandler(async (req, res) => {
 			_id: updatedUser._id,
 			name: updatedUser.name,
 			email: updatedUser.email,
+			profilePic: updatedUser.profilePic,
 		});
 	} else {
 		res.status(400);
@@ -219,7 +223,39 @@ const refusedFollowReq = asyncHandler(async (req, res) => {
 		throw new Error("Server Error, Please try again.");
 	}
 });
-
+const updateProfilePic = async (req, res) => {
+	const imageUrl = req.body.imageUrl;
+	console.log(imageUrl);
+	const user = await User.findOneAndUpdate(
+		{ _id: req.user._id },
+		{ profilePic: imageUrl }
+	);
+	if (user) {
+		const updatedProfile = await User.findOne({ _id: req.user._id });
+		if (updatedProfile) {
+			console.log({ profilePic: updatedProfile.profilePic });
+			res.status(200).json({ profilePic: updatedProfile.profilePic });
+		} else {
+			res.status(500);
+			throw new Error("Server error. Please try again.");
+		}
+	}
+};
+const deleteProfilePic = async (req, res) => {
+	const deletedProfilePic = await User.findOneAndUpdate(
+		{ _id: req.user._id },
+		{ profilePic: defaultImg }
+	);
+	if (deletedProfilePic) {
+		const updatedProfile = await User.findOne({ _id: req.user._id });
+		if (updatedProfile) {
+			res.status(200).json({ profilePic: updatedProfile.profilePic });
+		} else {
+			res.status(500);
+			throw new Error("Server error. Please try again.");
+		}
+	}
+};
 export {
 	registerUser,
 	loginUser,
@@ -233,4 +269,6 @@ export {
 	acceptedFollowReq,
 	refusedFollowReq,
 	getFollowReq,
+	updateProfilePic,
+	deleteProfilePic,
 };

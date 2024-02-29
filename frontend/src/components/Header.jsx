@@ -34,7 +34,13 @@ const Header = () => {
 						{userInfo ? (
 							<>
 								<li>
-									<Link to="/profile">{userInfo.name}</Link>
+									<Link to="/profile">
+										<img
+											src={userInfo.profilePic}
+											alt={`${userInfo.name} profile picture`}
+										/>
+										{userInfo.name}
+									</Link>
 								</li>
 								<li>
 									<Link to="/people">People</Link>

@@ -18,9 +18,24 @@ const authSlice = createSlice({
 			state.userInfo = null;
 			localStorage.removeItem("userInfo");
 		},
+		updateProfilePic: (state, action) => {
+			state.userInfo = {
+				...state.userInfo,
+				profilePic: action.payload.profilePic,
+			};
+			localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+		},
+		deleteProfilePic: (state, action) => {
+			state.userInfo = {
+				...state.userInfo,
+				profilePic: action.payload.profilePic,
+			};
+			localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+		},
 	},
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, updateProfilePic, deleteProfilePic } =
+	authSlice.actions;
 
 export default authSlice.reducer;

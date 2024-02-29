@@ -14,6 +14,8 @@ import {
 	acceptedFollowReq,
 	refusedFollowReq,
 	getFollowReq,
+	updateProfilePic,
+	deleteProfilePic,
 } from "../controllers/userController.js";
 import {
 	protectLoginRoute,
@@ -43,5 +45,8 @@ router.post("/send", protectRoute, sendFollowReq);
 router.get("/follow-request", protectRoute, getFollowReq);
 router.post("/accepted", protectRoute, acceptedFollowReq);
 router.post("/refused", protectRoute, refusedFollowReq);
+
+router.put("/profile-pic", protectRoute, updateProfilePic);
+router.delete("/profile-pic", protectRoute, deleteProfilePic);
 
 export default router;
