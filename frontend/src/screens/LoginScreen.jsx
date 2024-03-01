@@ -5,6 +5,7 @@ import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
+import GuestLogin from "../components/GuestLogin";
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState("");
@@ -58,11 +59,14 @@ const LoginScreen = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-				</div>{" "}
+				</div>
 				<div>{isLoading && <Loader />}</div>
 				<button type="submit">Login</button>
 				<div>
 					New Customer? <Link to="/register">Register.</Link>
+				</div>
+				<div>
+					<GuestLogin />
 				</div>
 			</form>
 		</>

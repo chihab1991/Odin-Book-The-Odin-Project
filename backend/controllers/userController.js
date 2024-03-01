@@ -9,8 +9,12 @@ const registerUser = asyncHandler(async (req, res) => {
 		res.status(401);
 		throw new Error("Email already exist.");
 	}
-	const profilePic = defaultImg;
-	const user = await User.create({ name, email, password, profilePic });
+	const user = await User.create({
+		name,
+		email,
+		password,
+		profilePic: defaultImg,
+	});
 	if (user) {
 		res.status(200).json({
 			_id: user._id,

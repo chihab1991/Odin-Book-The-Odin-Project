@@ -77,7 +77,6 @@ const updatePost = asyncHandler(async (req, res) => {
 // DELETE delete post
 const deletePost = asyncHandler(async (req, res) => {
 	const { postId } = req.body;
-	console.log(req.body);
 	const deletedPost = await Post.findByIdAndDelete(postId);
 	if (deletedPost) {
 		res.status(200).json({ message: "Post deleted successfully." });

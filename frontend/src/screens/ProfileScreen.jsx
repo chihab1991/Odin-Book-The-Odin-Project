@@ -6,6 +6,7 @@ import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import ProfileImageUpload from "../components/ProfileImageUpload";
+import Post from "../components/Post";
 
 const ProfileScreen = () => {
 	const [name, setName] = useState("");
@@ -15,11 +16,11 @@ const ProfileScreen = () => {
 
 	const [edit, setEdit] = useState(false);
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [updateProfile, { isLoading }] = useUpdateUserMutation();
 	const { userInfo } = useSelector((state) => state.auth);
+	const { posts } = useSelector((state) => state.posts);
 
 	useEffect(() => {
 		setName(userInfo.name);
@@ -105,21 +106,34 @@ const ProfileScreen = () => {
 					</form>
 				</div>
 			) : (
-				<div>
-					<h2>Your Profile:</h2>
+				<>
 					<div>
-						<p>
-							<b>Name:</b> {name}
-						</p>
-						<p>
-							<b>Email:</b>
-							{email}
-						</p>
+						<h2>Your Profile:</h2>
+						<div>
+							<p>
+								<b>Name:</b> {name}
+							</p>
+							<p>
+								<b>Email:</b>
+								{email}
+							</p>
+						</div>
+						<div>
+							<button onClick={handleClick}>Edit</button>
+						</div>
 					</div>
 					<div>
-						<button onClick={handleClick}>Edit</button>
+						<h2>Your Posts:</h2>
+						{posts &&
+							posts.map((post) => {
+								if (post.author._id === userInfo._id) {
+									return (
+										<Post key={post._id} post={post} userId={userInfo._id} />
+									);
+								}
+							})}
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);

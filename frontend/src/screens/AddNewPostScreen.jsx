@@ -16,7 +16,6 @@ const AddNewPostScreen = () => {
 		}
 		try {
 			const res = await addPost({ content }).unwrap();
-			console.log(res);
 			navigate("/");
 		} catch (err) {
 			toast.error(err?.data?.message || err.error);
