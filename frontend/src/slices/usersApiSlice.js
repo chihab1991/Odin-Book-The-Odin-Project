@@ -24,6 +24,12 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 			}),
 		}),
+		checkUser: builder.mutation({
+			query: () => ({
+				url: `${USERS_URL}/check-user`,
+				method: "POST",
+			}),
+		}),
 		updateUser: builder.mutation({
 			query: (data) => ({
 				url: `${USERS_URL}/update`,
@@ -52,6 +58,7 @@ export const {
 	useRegisterMutation,
 	useLogoutMutation,
 	useUpdateUserMutation,
+	useCheckUserMutation,
 	useUpdateUserPictureMutation,
 	useDeleteUserPictureMutation,
 } = usersApiSlice;

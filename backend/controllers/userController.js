@@ -67,6 +67,16 @@ const logoutUser = asyncHandler(async (req, res) => {
 	});
 });
 
+const checkUser = asyncHandler(async (req, res) => {
+	console.log(req.user);
+	if (req.user) {
+		const { _id, name, email, profilePic } = req.user;
+		res.status(200).json({ _id, name, email, profilePic });
+	} else {
+		res.status(501).json(null);
+	}
+});
+
 const usersToFollow = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.user._id);
 
@@ -227,7 +237,7 @@ const refusedFollowReq = asyncHandler(async (req, res) => {
 		throw new Error("Server Error, Please try again.");
 	}
 });
-const updateProfilePic = async (req, res) => {
+const updateProfilePic = asyncHandler(async (req, res) => {
 	const imageUrl = req.body.imageUrl;
 	console.log(imageUrl);
 	const user = await User.findOneAndUpdate(
@@ -244,8 +254,8 @@ const updateProfilePic = async (req, res) => {
 			throw new Error("Server error. Please try again.");
 		}
 	}
-};
-const deleteProfilePic = async (req, res) => {
+});
+const deleteProfilePic = asyncHandler(async (req, res) => {
 	const deletedProfilePic = await User.findOneAndUpdate(
 		{ _id: req.user._id },
 		{ profilePic: defaultImg }
@@ -259,13 +269,14 @@ const deleteProfilePic = async (req, res) => {
 			throw new Error("Server error. Please try again.");
 		}
 	}
-};
+});
 export {
 	registerUser,
 	loginUser,
 	getUser,
 	updateUser,
 	logoutUser,
+	checkUser,
 	usersToFollow,
 	followers,
 	following,

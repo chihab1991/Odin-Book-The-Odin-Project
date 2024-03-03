@@ -27,7 +27,9 @@ const Header = () => {
 		<header>
 			<nav>
 				<div className="nav-left">
-					<h2>Odin Book</h2>
+					<Link to="/">
+						<h2>Odin Book</h2>
+					</Link>
 				</div>
 				<div className="nav-right">
 					<ul>
@@ -43,7 +45,9 @@ const Header = () => {
 									</Link>
 								</li>
 								<li>
-									<Link to="/people">People</Link>
+									<Link to="/people" className="text-3xl">
+										People
+									</Link>
 								</li>
 								<li>
 									<Link to="/follow-request">Requests</Link>

@@ -7,6 +7,7 @@ import {
 	updateUser,
 	getUser,
 	logoutUser,
+	checkUser,
 	usersToFollow,
 	followers,
 	following,
@@ -26,7 +27,7 @@ const router = express.Router();
 // POST register new user
 
 router.post("/", registerUser);
-
+router.post("/check-user", checkUser);
 router.post(
 	"/login",
 	protectLoginRoute,
