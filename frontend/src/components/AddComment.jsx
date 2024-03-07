@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useAddCommentMutation } from "../slices/postApiSlice";
 import { newComment } from "../slices/postsSlice";
 import { toast } from "react-toastify";
+import { FaPlus } from "react-icons/fa6";
 
 const AddComment = ({ postId }) => {
 	const [text, setText] = useState("");
@@ -24,19 +25,20 @@ const AddComment = ({ postId }) => {
 	};
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
-				<div>
-					<label htmlFor="commentText"></label>
-					<input
-						type="text"
-						name="commentText"
-						id="commentText"
-						placeholder="Add a comment..."
-						value={text}
-						onChange={(e) => setText(e.target.value)}
-					/>
-				</div>
-				<button type="submit">Add</button>
+			<form onSubmit={handleSubmit} className="flex mt-4">
+				<input
+					type="text"
+					name="commentText"
+					id="commentText"
+					placeholder="Add a comment..."
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+					className="grow text-slate-900 text-base px-4 py-2 rounded "
+				/>
+
+				<button type="submit" className="p-2 border-slate-50 rounded-none">
+					<FaPlus />
+				</button>
 			</form>
 		</>
 	);

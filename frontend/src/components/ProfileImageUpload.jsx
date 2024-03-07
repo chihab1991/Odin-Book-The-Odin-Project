@@ -35,14 +35,16 @@ const ProfileImageUpload = ({ profilePic, name }) => {
 	};
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="mb-4">
 				{previewImage && (
-					<div>
+					<div className=" mb-8">
 						<img src={previewImage} alt={name + " profile picture preview"} />
 					</div>
 				)}
-				<div>
-					<label htmlFor="img">Select a profile picture:</label>
+				<div className="flex items-center mb-4">
+					<label htmlFor="img" className="inline-block text-2xl mr-4 grow">
+						Select a profile picture:
+					</label>
 					<input
 						type="file"
 						name="img"
@@ -55,10 +57,13 @@ const ProfileImageUpload = ({ profilePic, name }) => {
 							);
 							setImage(e.target.files[0]);
 						}}
+						className="text-xl inline-block p-2 text-slate-900 w-80"
 					/>
 				</div>
 				{/* TODO change button text */}
-				<button>Upload Image</button>
+				<button className="text-center text-xl border-white px-8  ml-2 mr-8 hover:text-[#646cff]">
+					Upload Image
+				</button>
 				<DeleteProfileImg />
 			</form>
 		</>

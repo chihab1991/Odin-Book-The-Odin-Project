@@ -5,6 +5,8 @@ import {
 import { addLike, removeLike } from "./../slices/postsSlice";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import { FaHeart } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa6";
 
 const Like = ({ likes, userId, postId }) => {
 	const dispatch = useDispatch();
@@ -35,12 +37,18 @@ const Like = ({ likes, userId, postId }) => {
 
 	return (
 		<>
-			{likes.includes(userId) ? (
-				<p onClick={unlikeHandler}>unlike</p>
-			) : (
-				<p onClick={likeHandler}>like</p>
-			)}
-			<p>{likes.length} likes</p>
+			<div className="flex">
+				{likes.includes(userId) ? (
+					<p className="cursor-pointer" onClick={unlikeHandler}>
+						<FaHeart />
+					</p>
+				) : (
+					<p className="cursor-pointer" onClick={likeHandler}>
+						<FaRegHeart />
+					</p>
+				)}
+				<p className="ml-4">{likes.length} likes</p>
+			</div>
 		</>
 	);
 };

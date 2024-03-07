@@ -83,7 +83,7 @@ const usersToFollow = asyncHandler(async (req, res) => {
 	if (user) {
 		const users = await User.find({
 			$and: [{ _id: { $nin: user.following } }, { _id: { $ne: user._id } }],
-		}).select("email name");
+		}).select("email name profilePic");
 
 		if (users) {
 			res.status(200).json(users);
@@ -102,7 +102,7 @@ const followers = asyncHandler(async (req, res) => {
 
 	if (user) {
 		const users = await User.find({ _id: { $in: user.followers } }).select(
-			"email name"
+			"email name profilePic"
 		);
 
 		if (users) {
@@ -123,7 +123,7 @@ const following = asyncHandler(async (req, res) => {
 	if (user) {
 		const users = await User.find({
 			$and: [{ _id: { $in: user.following } }, { _id: { $ne: user._id } }],
-		}).select("email name");
+		}).select("email name profilePic");
 
 		if (users) {
 			res.status(200).json(users);
@@ -171,7 +171,7 @@ const getFollowReq = asyncHandler(async (req, res) => {
 
 	const followRequests = await User.find({
 		_id: { $in: user.followReqReceived },
-	}).select("name email");
+	}).select("name email profilePic");
 
 	if (followRequests) {
 		res.status(200).json(followRequests);

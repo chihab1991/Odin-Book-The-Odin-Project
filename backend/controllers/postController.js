@@ -23,15 +23,16 @@ const getAllPosts = asyncHandler(async (req, res) => {
 		const posts = await Post.find({
 			author: [user._id, ...user.following],
 		})
-			.populate("author", "name email")
+			.populate("author", "name email profilePic")
 			.populate({
 				path: "comments",
 				field: "text",
 				populate: {
 					path: "author",
-					select: "name email",
+					select: "name email profilePic",
 				},
-			});
+			})
+			.sort({ createdAt: -1 });
 		if (posts) {
 			res.status(200).json(posts);
 		} else {
@@ -48,7 +49,10 @@ const getAllPosts = asyncHandler(async (req, res) => {
 // POST get post
 const getPost = asyncHandler(async (req, res) => {
 	const { postId } = req.body;
-	const post = await Post.findById(postId).populate("author", "name email");
+	const post = await Post.findById(postId).populate(
+		"author",
+		"name email profilePic"
+	);
 	if (post) {
 		res.status(200).json(post);
 	} else {
@@ -61,7 +65,7 @@ const getPost = asyncHandler(async (req, res) => {
 const updatePost = asyncHandler(async (req, res) => {
 	const post = await Post.findById(req.body.postId).populate(
 		"author",
-		"name email"
+		"name email profilePic"
 	);
 
 	if (post) {

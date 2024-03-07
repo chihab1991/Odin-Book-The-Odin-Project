@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
-import Loader from "../components/Loader";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const GuestLogin = () => {
 	const navigate = useNavigate();
@@ -34,8 +34,23 @@ const GuestLogin = () => {
 	};
 	return (
 		<>
-			<button onClick={clickHandler}>Login as Guest</button>
-			{isLoading && <Loader />}
+			<button
+				onClick={clickHandler}
+				className="bg-inherit border-white hover:text-[#646cff]"
+			>
+				Login as Guest
+			</button>
+			{isLoading && (
+				<div className="text-center pt-32">
+					<ClipLoader
+						loading={isLoading}
+						color={"#F8FaFC"}
+						size={150}
+						aria-label="Loading Spinner"
+						data-testid="loader"
+					/>
+				</div>
+			)}
 		</>
 	);
 };

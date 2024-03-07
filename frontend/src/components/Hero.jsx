@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAllPostsMutation } from "../slices/postApiSlice";
 import { setPosts } from "../slices/postsSlice";
 import { toast } from "react-toastify";
-import Loader from "../components/Loader";
+import ClipLoader from "react-spinners/ClipLoader";
 import Post from "./Post";
 import { useEffect } from "react";
 
@@ -30,25 +30,39 @@ const Hero = () => {
 			}
 		};
 		postsGetter();
-	}, []);
+	}, [dispatch, getAllPosts]);
 	return (
 		<>
-			{isLoading && <Loader />}
-			{!isLoading && posts && (
-				<>
-					{posts.map((post) => (
-						<Post key={post._id} post={post} userId={userInfo._id} />
-					))}
-				</>
-			)}
-			{!isLoading && posts?.length == 0 && (
-				<>
-					<div>
-						{/* TODO modify msg  */}
-						<h1>take it</h1>
+			<div className="">
+				{isLoading && (
+					<div className="text-center pt-40">
+						<ClipLoader
+							loading={isLoading}
+							color={"#F8FaFC"}
+							size={100}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+						/>
 					</div>
-				</>
-			)}
+				)}
+				{!isLoading && posts && (
+					<>
+						{posts.map((post) => (
+							<Post key={post._id} post={post} userId={userInfo._id} />
+						))}
+					</>
+				)}
+				{!isLoading && posts?.length == 0 && (
+					<>
+						<div>
+							{/* TODO modify msg  */}
+							<h1 className="text-2xl text-center">
+								There are no posts added by you or your friends.
+							</h1>
+						</div>
+					</>
+				)}
+			</div>
 		</>
 	);
 };

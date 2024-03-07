@@ -22,11 +22,21 @@ const Person = ({ person, people, setPeople }) => {
 
 	return (
 		<>
-			<div>
-				<div>person Pic</div>
-				<h3>{person.name}</h3>
-				<div>
-					<button type="button" onClick={followRequestHandler}>
+			<div className="flex items-center justify-between shadow-slate-500 shadow-sm p-8 mb-4 my-auto">
+				<div className="flex items-center ">
+					<img
+						src={person.profilePic}
+						alt={person.name}
+						className="w-12 rounded-full mr-4"
+					/>
+					<h3 className="text-xl font-semibold">{person.name}</h3>
+				</div>
+				<div className="mr-8">
+					<button
+						type="button"
+						onClick={followRequestHandler}
+						className="border-slate-500 border hover:text-[#646cff]"
+					>
 						follow
 					</button>
 				</div>

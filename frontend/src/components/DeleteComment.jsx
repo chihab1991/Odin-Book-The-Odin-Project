@@ -2,6 +2,7 @@ import { useDeleteCommentMutation } from "../slices/postApiSlice";
 import { removeComment } from "../slices/postsSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { FaTrash } from "react-icons/fa6";
 
 const DeleteComment = ({ postId, commentId }) => {
 	const [deleteComment, { isLoading }] = useDeleteCommentMutation();
@@ -19,7 +20,12 @@ const DeleteComment = ({ postId, commentId }) => {
 	};
 	return (
 		<>
-			<button onClick={handleClick}>Delete</button>
+			<button
+				onClick={handleClick}
+				className="p-2 rounded-full border-slate-50"
+			>
+				<FaTrash />
+			</button>
 		</>
 	);
 };

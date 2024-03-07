@@ -24,46 +24,59 @@ const Header = () => {
 	};
 
 	return (
-		<header>
-			<nav>
+		<header className="py-4 px-3 shadow-slate-600 shadow fixed w-full bg-slate-900">
+			<nav className="max-w-screen-xl  mx-auto flex justify-between items-center">
 				<div className="nav-left">
 					<Link to="/">
-						<h2>Odin Book</h2>
+						<h2 className="text-3xl font-bold">Odin Book</h2>
 					</Link>
 				</div>
 				<div className="nav-right">
-					<ul>
+					<ul className="flex justify-between items-center text-xl font-bold">
 						{userInfo ? (
 							<>
-								<li>
-									<Link to="/profile">
+								<li className="ml-6">
+									<Link to="/profile" className="font-bold">
 										<img
 											src={userInfo.profilePic}
 											alt={`${userInfo.name} profile picture`}
+											className="size-7 rounded-full"
 										/>
-										{userInfo.name}
 									</Link>
 								</li>
-								<li>
-									<Link to="/people" className="text-3xl">
+								<li className="ml-6">
+									<Link to="/people" className="font-bold">
 										People
 									</Link>
 								</li>
-								<li>
-									<Link to="/follow-request">Requests</Link>
+								<li className="ml-6">
+									<Link to="/follow-request" className="font-bold">
+										Invitation
+									</Link>
 								</li>
-								<li>
-									<Link to="/add-new-post">New Post</Link>
+								<li className="ml-6">
+									<Link to="/add-new-post" className="font-bold">
+										New Post
+									</Link>
 								</li>
-								<li onClick={logoutHandler}>Logout</li>
+								<li
+									className="ml-6 font-bold cursor-pointer text-[#646cff] hover:text-[#535bf2]"
+									onClick={logoutHandler}
+								>
+									Logout
+								</li>
 							</>
 						) : (
 							<>
-								<li>
-									<Link to="/login">Sign In</Link>
+								<li className="ml-6">
+									<Link to="/login" className="font-bold">
+										Sign In
+									</Link>
 								</li>
-								<li>
-									<Link to="/register">Sign Up</Link>
+								<li className="ml-6">
+									<Link to="/register" className="font-bold">
+										Sign Up
+									</Link>
 								</li>
 							</>
 						)}

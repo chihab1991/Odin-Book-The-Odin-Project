@@ -18,7 +18,12 @@ const DeleteProfileImg = () => {
 	};
 	return (
 		<>
-			<button onClick={handleClick}>Delete</button>
+			<button
+				onClick={handleClick}
+				className="text-center text-xl border-white px-8 hover:text-[#646cff]"
+			>
+				Delete
+			</button>
 		</>
 	);
 };

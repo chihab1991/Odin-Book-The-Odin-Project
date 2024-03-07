@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Person from "../components/Person";
-import Loader from "../components/Loader";
+import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 
 const PeopleScreen = () => {
@@ -25,13 +25,22 @@ const PeopleScreen = () => {
 
 	return (
 		<>
-			{loading && <Loader />}
+			{loading && (
+				<div className="text-center pt-40">
+					<ClipLoader
+						loading={loading}
+						color={"#F8FaFC"}
+						size={150}
+						aria-label="Loading Spinner"
+						data-testid="loader"
+					/>
+				</div>
+			)}
 			{!loading &&
 				people.length > 0 &&
 				people.map((person) => {
 					return (
 						<div key={person._id}>
-							1
 							<Person
 								key={person._id}
 								person={person}
@@ -42,8 +51,10 @@ const PeopleScreen = () => {
 					);
 				})}
 			{!loading && people.length < 1 && (
-				<div>
-					<p>There are no people here yet.</p>
+				<div className="flex justify-center items-center">
+					<p className="text-3xl font-semibold">
+						There are no people here yet.
+					</p>
 				</div>
 			)}
 		</>

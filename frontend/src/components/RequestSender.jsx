@@ -37,14 +37,28 @@ const RequestSender = ({ sender, senders, setSenders }) => {
 
 	return (
 		<>
-			<div>
-				<div>person Pic</div>
-				<h3>{sender.name}</h3>
+			<div className="flex items-center justify-between shadow-slate-500 shadow-sm p-8 mb-4 my-auto">
+				<div className="flex items-center ">
+					<img
+						src={sender.profilePic}
+						alt={sender.name}
+						className="w-12 rounded-full mr-4"
+					/>
+					<h3 className="text-xl font-semibold">{sender.name}</h3>
+				</div>
 				<div>
-					<button type="button" onClick={acceptRequestHandler}>
+					<button
+						type="button"
+						onClick={acceptRequestHandler}
+						className="border-slate-500 border hover:text-[#646cff] mr-4"
+					>
 						Accept
 					</button>
-					<button type="button" onClick={refuseRequestHandler}>
+					<button
+						type="button"
+						onClick={refuseRequestHandler}
+						className="border-slate-500 border hover:text-[#646cff]"
+					>
 						Decline
 					</button>
 				</div>

@@ -15,7 +15,6 @@ import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
 import ProfileScreen from "./screens/ProfileScreen.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
-import UsersScreen from "./screens/PeopleScreen.jsx";
 import FollowReqScreen from "./screens/FollowReqScreen.jsx";
 import AddNewPostScreen from "./screens/AddNewPostScreen.jsx";
 import PeopleScreen from "./screens/PeopleScreen.jsx";

@@ -16,7 +16,10 @@ const addComment = asyncHandler(async (req, res) => {
 		if (comment) {
 			post.comments.push(comment._id);
 			const updatedPost = await post.save();
-			const addedComment = await comment.populate("author", "name email");
+			const addedComment = await comment.populate(
+				"author",
+				"name email profilePic"
+			);
 			if (updatedPost && addedComment) {
 				res.status(200).json(addedComment);
 			} else {
